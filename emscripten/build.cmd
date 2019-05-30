@@ -22,5 +22,5 @@ call emcc ..\sources\render.cpp -c
 call emcc ..\sources\roomchange.cpp -c
 call emcc ..\sources\shrines.cpp -c
 call emcc ..\sources\sound.cpp -c
-call emcc bitmaps.o debug-report.o debug.o demons.o drawing.o filehandling.o gameaux.o gamecycle.o gameinteractions.o gameobjects.o gametiles.o ingamecycle.o keyboard.o line_clip.o loadpcx.o main.o passwords.o path.o render.o roomchange.o shrines.o sound.o -o mog.html --preload-file ../assets@/ -s TOTAL_MEMORY=67108864 --use-preload-plugins -s STB_IMAGE=1 -O2
+call emcc --shell-file  shell-minimal.html bitmaps.o debug-report.o debug.o demons.o drawing.o filehandling.o gameaux.o gamecycle.o gameinteractions.o gameobjects.o gametiles.o ingamecycle.o keyboard.o line_clip.o loadpcx.o main.o passwords.o path.o render.o roomchange.o shrines.o sound.o -o mog.html --preload-file ../assets@/ -s TOTAL_MEMORY=67108864 --use-preload-plugins -s STB_IMAGE=1 -O2
 
