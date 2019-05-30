@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Maze of Galious
+Comment=Remake of a classic MSX platformer
+Exec=mog
+Icon=mog.png
+Terminal=false
+Type=Application
+Categories=Application;Game;ArcadeGame;
+StartupNotify=false

@@ -1,0 +1,6 @@
+mog (0.63-1548) stable; urgency=low
+
+  * Bugfix release (applied password patch from Gamut)
+
+ -- Patsie <patsie@no-email>  Fri, 13 Mar 2009 12:45:12 +0100
+

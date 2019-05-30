@@ -1,0 +1,13 @@
+Source: mog
+Section: games
+Priority: optional
+Maintainer: Patsie <patsie@no-email>
+Build-Depends: debhelper (>= 5)
+Standards-Version: 3.7.3
+Homepage: http://www.braingames.getput.com/mog/default.asp
+
+Package: mog
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Massive, free roaming platform game
+ MoG is a very addictive game where you have to kill thousands of enemies, collect items in order to obtain new powers and defeat some really great demons at the end of each level.
