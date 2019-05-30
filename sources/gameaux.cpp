@@ -189,6 +189,8 @@ extern SDLKey last_word[16];
 
 extern char password[48];
 
+/* Palette reference */
+char colors[768];
 
 
 void ReleaseGraphics(void)
@@ -223,74 +225,74 @@ void ReleaseGraphics(void)
 
 
 void SetSFXVolume(int volume) 
-{
+{	
 	if (sound_enabled) {
-		Mix_VolumeChunk(S_gamestart,volume);
-		Mix_VolumeChunk(S_jump,volume);
-		Mix_VolumeChunk(S_sword,volume);
-		Mix_VolumeChunk(S_swordhit,volume);
-		Mix_VolumeChunk(S_item,volume);
-		Mix_VolumeChunk(S_ah,volume);
-		Mix_VolumeChunk(S_ah2,volume);
-		Mix_VolumeChunk(S_powerup,volume);
-		Mix_VolumeChunk(S_enemyhit,volume);
-		Mix_VolumeChunk(S_door,volume);
-		Mix_VolumeChunk(S_enemykill,volume);
-		Mix_VolumeChunk(S_ladderdisapear,volume);
-		Mix_VolumeChunk(S_armourhit,volume);
-		Mix_VolumeChunk(S_pause,volume);
-		Mix_VolumeChunk(S_death,volume);
-		Mix_VolumeChunk(S_gameover,volume);
-		Mix_VolumeChunk(S_worldkey,volume);
-		Mix_VolumeChunk(S_entering,volume);
-		Mix_VolumeChunk(S_enterwater,volume);
-		Mix_VolumeChunk(S_select,volume);
-		Mix_VolumeChunk(S_firearrow,volume);
-		Mix_VolumeChunk(S_firearrow2,volume);
-		Mix_VolumeChunk(S_fall,volume);
-		Mix_VolumeChunk(S_waterhit,volume);
-		Mix_VolumeChunk(S_lavahit,volume);
-		Mix_VolumeChunk(S_nocoins,volume);
-		Mix_VolumeChunk(S_stones,volume);
-		Mix_VolumeChunk(S_blob,volume);
-		Mix_VolumeChunk(S_shield,volume);
-		Mix_VolumeChunk(S_flapwings,volume);
-		Mix_VolumeChunk(S_rotatedoor,volume);
-		Mix_VolumeChunk(S_demon2ball,volume);
-		Mix_VolumeChunk(S_appearing,volume);
-		Mix_VolumeChunk(S_firebreath,volume);
-		Mix_VolumeChunk(S_F1,volume);
-		Mix_VolumeChunk(S_karrow,volume);
-		Mix_VolumeChunk(S_jumptree,volume);
-		Mix_VolumeChunk(S_skeletonhit,volume);
-		Mix_VolumeChunk(S_enemybullet,volume);
-		Mix_VolumeChunk(S_headbullet,volume);
-		Mix_VolumeChunk(S_dropmine,volume);
-		Mix_VolumeChunk(S_firefire,volume);
-		Mix_VolumeChunk(S_fireball,volume);
-		Mix_VolumeChunk(S_fireball2,volume);
-		Mix_VolumeChunk(S_wdoor,volume);
-		Mix_VolumeChunk(S_door2,volume);
-		Mix_VolumeChunk(S_demonhit,volume);
-		Mix_VolumeChunk(S_bearbullet,volume);
-		Mix_VolumeChunk(S_chickenbomb,volume);
-		Mix_VolumeChunk(S_colormonster,volume);
-		Mix_VolumeChunk(S_waterstone,volume);
-		Mix_VolumeChunk(S_demon4jump,volume);
-		Mix_VolumeChunk(S_rockman,volume);
-		Mix_VolumeChunk(S_mine,volume);
-		Mix_VolumeChunk(S_bible,volume);
-		Mix_VolumeChunk(S_demon1bones,volume);
-		Mix_VolumeChunk(S_demon1jump,volume);
-		Mix_VolumeChunk(S_owl,volume);
-		Mix_VolumeChunk(S_demon7bullet,volume);
-		Mix_VolumeChunk(S_demon8bullet,volume);
-		Mix_VolumeChunk(S_flamebullet,volume);
-		Mix_VolumeChunk(S_snakebullet,volume);
-		Mix_VolumeChunk(S_gorilla,volume);
-		Mix_VolumeChunk(S_lizardtongue,volume);
-		Mix_VolumeChunk(S_bdemonbullet,volume);
-		Mix_VolumeChunk(S_lightning,volume);
+		// Mix_VolumeChunk(S_gamestart,volume);
+		// Mix_VolumeChunk(S_jump,volume);
+		// Mix_VolumeChunk(S_sword,volume);
+		// Mix_VolumeChunk(S_swordhit,volume);
+		// Mix_VolumeChunk(S_item,volume);
+		// Mix_VolumeChunk(S_ah,volume);
+		// Mix_VolumeChunk(S_ah2,volume);
+		// Mix_VolumeChunk(S_powerup,volume);
+		// Mix_VolumeChunk(S_enemyhit,volume);
+		// Mix_VolumeChunk(S_door,volume);
+		// Mix_VolumeChunk(S_enemykill,volume);
+		// Mix_VolumeChunk(S_ladderdisapear,volume);
+		// Mix_VolumeChunk(S_armourhit,volume);
+		// Mix_VolumeChunk(S_pause,volume);
+		// Mix_VolumeChunk(S_death,volume);
+		// Mix_VolumeChunk(S_gameover,volume);
+		// Mix_VolumeChunk(S_worldkey,volume);
+		// Mix_VolumeChunk(S_entering,volume);
+		// Mix_VolumeChunk(S_enterwater,volume);
+		// Mix_VolumeChunk(S_select,volume);
+		// Mix_VolumeChunk(S_firearrow,volume);
+		// Mix_VolumeChunk(S_firearrow2,volume);
+		// Mix_VolumeChunk(S_fall,volume);
+		// Mix_VolumeChunk(S_waterhit,volume);
+		// Mix_VolumeChunk(S_lavahit,volume);
+		// Mix_VolumeChunk(S_nocoins,volume);
+		// Mix_VolumeChunk(S_stones,volume);
+		// Mix_VolumeChunk(S_blob,volume);
+		// Mix_VolumeChunk(S_shield,volume);
+		// Mix_VolumeChunk(S_flapwings,volume);
+		// Mix_VolumeChunk(S_rotatedoor,volume);
+		// Mix_VolumeChunk(S_demon2ball,volume);
+		// Mix_VolumeChunk(S_appearing,volume);
+		// Mix_VolumeChunk(S_firebreath,volume);
+		// Mix_VolumeChunk(S_F1,volume);
+		// Mix_VolumeChunk(S_karrow,volume);
+		// Mix_VolumeChunk(S_jumptree,volume);
+		// Mix_VolumeChunk(S_skeletonhit,volume);
+		// Mix_VolumeChunk(S_enemybullet,volume);
+		// Mix_VolumeChunk(S_headbullet,volume);
+		// Mix_VolumeChunk(S_dropmine,volume);
+		// Mix_VolumeChunk(S_firefire,volume);
+		// Mix_VolumeChunk(S_fireball,volume);
+		// Mix_VolumeChunk(S_fireball2,volume);
+		// Mix_VolumeChunk(S_wdoor,volume);
+		// Mix_VolumeChunk(S_door2,volume);
+		// Mix_VolumeChunk(S_demonhit,volume);
+		// Mix_VolumeChunk(S_bearbullet,volume);
+		// Mix_VolumeChunk(S_chickenbomb,volume);
+		// Mix_VolumeChunk(S_colormonster,volume);
+		// Mix_VolumeChunk(S_waterstone,volume);
+		// Mix_VolumeChunk(S_demon4jump,volume);
+		// Mix_VolumeChunk(S_rockman,volume);
+		// Mix_VolumeChunk(S_mine,volume);
+		// Mix_VolumeChunk(S_bible,volume);
+		// Mix_VolumeChunk(S_demon1bones,volume);
+		// Mix_VolumeChunk(S_demon1jump,volume);
+		// Mix_VolumeChunk(S_owl,volume);
+		// Mix_VolumeChunk(S_demon7bullet,volume);
+		// Mix_VolumeChunk(S_demon8bullet,volume);
+		// Mix_VolumeChunk(S_flamebullet,volume);
+		// Mix_VolumeChunk(S_snakebullet,volume);
+		// Mix_VolumeChunk(S_gorilla,volume);
+		// Mix_VolumeChunk(S_lizardtongue,volume);
+		// Mix_VolumeChunk(S_bdemonbullet,volume);
+		// Mix_VolumeChunk(S_lightning,volume);
 	} /* if */ 
 } /* SetSFXVolume */ 
 
@@ -2560,15 +2562,60 @@ void guardar_configuracion(char *filename)
 } /* guardar_configuraciÛn */ 
 
 
-
 bool cargar_configuracion(char *filename)
+{
+	printf("Enscripten read config\n");
+
+	UP_KEY=SDLK_UP;
+	DOWN_KEY=SDLK_DOWN;
+	LEFT_KEY=SDLK_LEFT;
+	RIGHT_KEY=SDLK_RIGHT;
+	SWORD_KEY=SDLK_SPACE;
+	WEAPON_KEY=SDLK_m;
+	ITEM_KEY=SDLK_F1;
+	PAUSE_KEY=SDLK_F2;
+
+	/* Graphics path: */ 
+	char *tmp = "graphics/naramura/";
+	
+	for(int i=0;i<n_g_paths;i++) {
+		printf("Comparing %s with %s\n", tmp, g_paths[i]);
+		if (strcmp(tmp,g_paths[i])==0) {
+			act_g_path=i;
+			g_path=g_paths[i];
+		} /* if */ 
+	} /* for */ 
+
+	if (act_g_path==-1) return false;
+
+	/* Sound path: */ 
+	tmp = "sound/jorito/";
+
+	for(int i=0;i<n_s_paths;i++) {
+		if (strcmp(tmp,s_paths[i])==0) {
+			act_s_path=i;
+			s_path=s_paths[i];
+		} /* if */ 
+	} /* for */ 
+
+	if (act_s_path==-1) return false;
+
+	return true;
+}
+
+bool cargar_configuracion_old(char *filename)
 {
 	FILE *fp;
 	int i,itmp[4];
 	char tmp[256];
 
+	printf("NON-Enscripten read config\n");
+
 	fp=f1open(filename,"r",USERDATA);
-	if (fp==NULL) return false;
+	if (fp==NULL) {
+		printf("Could not open cfg: %s\n",filename);
+		return false;
+	}
 
 	/* Keyboard configuration: */ 
 	if (4!=fscanf(fp,"%i %i %i %i",&itmp[0],&itmp[1],&itmp[2],&itmp[3])) return false;
@@ -2788,7 +2835,7 @@ void check_typed_word(void)
 	BYTE *keyboard;
 
 	SDL_PumpEvents();
-	keyboard = (unsigned char *)SDL_GetKeyState(NULL);
+	keyboard = (unsigned char *)SDL_GetKeyboardState(NULL);
 
 	SDLKey i;
 	int j;
@@ -2812,7 +2859,7 @@ bool typed_word_p(char *word)
 
 	for(i=0;i<l;i++) {
 		c=word[(l-1)-i];
-		str=SDL_GetKeyName(last_word[i]);
+		str=(char *)SDL_GetKeyName(last_word[i]);
 		if (str[1]!=0 || str[0]!=c) return false;
 	} /* for */ 
 
@@ -3051,6 +3098,8 @@ Bitmap *load_bitmap(char *name)
 	char tmp[256];
 	Bitmap *bmp;
 
+	printf("Loading bitmap %s\n", name);
+
 	sprintf(tmp,"%s%s",g_path,name);
 	bmp=new Bitmap(tmp);
 
@@ -3059,10 +3108,16 @@ Bitmap *load_bitmap(char *name)
 	sprintf(tmp,"%s%s",default_g_path,name);
 	bmp=new Bitmap(tmp);
 
-	if (bmp->get_image()!=0) return bmp;
+	if (bmp->get_image()!=0) {
+		if (strcmp(name, "konami.pcx") == 0) {
+			memcpy(colors, bmp->get_palete(), 768);
+		}
+		return bmp;
+	}
 
 	fprintf(stderr,"ERROR: file %s not found.\n",name);
 
+	printf("Error loading\n");
 	return 0;
 } /* load_bitmap */ 
 

@@ -1,0 +1,5 @@
+*.o
+*.wasm
+mog.html
+mog.js
+mog.data

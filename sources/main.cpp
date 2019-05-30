@@ -6,6 +6,10 @@
 #include <time.h>
 #endif
 
+ #ifdef __EMSCRIPTEN__ 
+ #include <emscripten.h> 
+ #endif 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "SDL.h"
@@ -24,11 +28,11 @@ extern void DebugReport(void);
 
 int SCREEN_X = 640;
 int SCREEN_Y = 400;
-int COLOUR_DEPTH = 8;
+int COLOUR_DEPTH = 32;
 
 #define TRANSPARANT_COLOR (0)
 
-bool fullscreen = true;
+bool fullscreen = false;
 
 // Redrawing constant
 int REDRAWING_PERIOD = 40;
@@ -52,12 +56,14 @@ extern int music_volume, sfx_volume;
 extern int fighting_demon;
 
 
-void pause(unsigned int time)
+void pause_main(unsigned int time)
 {
 	unsigned int initt = SDL_GetTicks();
 
 	while((SDL_GetTicks() - initt) < time);
 } 
+
+void one_iter();
 
 
 /* Pantalla: */ 
@@ -68,6 +74,10 @@ void Render(SDL_Surface *surface);
 SDL_Surface* initializeSDL(int flags);
 void finalizeSDL();
 
+int _time, act_time;
+SDL_Event event;
+bool quit = false;
+
 #ifdef _WIN32
 int PASCAL WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
                     LPSTR lpCmdLine, int nCmdShow)
@@ -76,25 +86,45 @@ int PASCAL WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
 int main(int argc, char** argv)
 {
 #endif
-
-	int time, act_time;
-	SDL_Event event;
-    bool quit = false;
+   	printf("Hello, Starting MOG\n");
 
 	screen = initializeSDL((fullscreen ? SDL_FULLSCREEN : 0));
+
+	printf("Hello, Starting MOG 2\n");
 
 	if (screen == 0) {
 		return 0;
 	}
 
-	time= init_time = SDL_GetTicks();
-
+	_time= init_time = SDL_GetTicks();
+	
+	printf("Hello, Starting MOG 3\n");
 	GameInit(SCREEN_X, SCREEN_Y);
 
-	SDL_FillRect(screen, NULL, 0);
-	while (!quit) {
+	printf("Hello, Starting MOG 4\n");
+	//SDL_FillRect(screen, NULL, 0);
+
+	printf("Rect should be filled!\n");
+
+#ifdef __EMSCRIPTEN__
+  		// void emscripten_set_main_loop(em_callback_func func, int fps, int simulate_infinite_loop);
+  		emscripten_set_main_loop(one_iter, 45, 0);
+#else
+  	while (!quit) {
+    	one_iter();
+    	// Delay to keep frame rate constant (using SDL)
+    	SDL_Delay(time_to_next_frame());
+  	}
 	
-		while(SDL_PollEvent(&event)) {
+	finalizeSDL();
+#endif	
+
+	return 0;
+}
+
+void one_iter() {
+	printf(".");
+	while(SDL_PollEvent(&event)) {
             switch(event.type) {
 			
                 // grab keyboard events 
@@ -139,7 +169,7 @@ FIXME: the code below is a big copy/paste; it should be in a separate function i
 							SDL_InitSubSystem(SDL_INIT_VIDEO);
 							
 							if (SDL_WasInit(SDL_INIT_VIDEO)) {
-								screen = SDL_SetVideoMode(SCREEN_X, SCREEN_Y, COLOUR_DEPTH, SDL_HWPALETTE|(fullscreen ? SDL_FULLSCREEN : 0));
+								screen = SDL_SetVideoMode(SCREEN_X, SCREEN_Y, COLOUR_DEPTH, SDL_SWSURFACE|(fullscreen ? SDL_FULLSCREEN : 0));
 								
 								if (screen == NULL) {
 									output_debug_message("Couldn't set %ix%ix%i", SCREEN_X, SCREEN_Y, COLOUR_DEPTH);
@@ -173,8 +203,8 @@ FIXME: the code below is a big copy/paste; it should be in a separate function i
 							SDL_QuitSubSystem(SDL_INIT_VIDEO);
 							SDL_InitSubSystem(SDL_INIT_VIDEO);
 							
-							if (SDL_WasInit(SDL_INIT_VIDEO)) {
-								screen = SDL_SetVideoMode(SCREEN_X, SCREEN_Y, COLOUR_DEPTH, SDL_HWPALETTE|(fullscreen ? SDL_FULLSCREEN : 0));
+							if (SDL_WasInit(SDL_INIT_VIDEO)) {								
+								screen = SDL_SetVideoMode(SCREEN_X, SCREEN_Y, COLOUR_DEPTH, SDL_SWSURFACE|(fullscreen ? SDL_FULLSCREEN : 0));
 								
 								if (screen == NULL) {
 									output_debug_message( "Couldn't set %ix%ix%i", SCREEN_X, SCREEN_Y, COLOUR_DEPTH);
@@ -250,37 +280,32 @@ FIXME: the code below is a big copy/paste; it should be in a separate function i
         }
 		
 		// game main loop
-		act_time = SDL_GetTicks();
-        if (!quit && act_time - time >= REDRAWING_PERIOD) {
-            int max_frame_step = 10;
-            do {
-                time += REDRAWING_PERIOD;
-                if ((act_time - time) > 10 * REDRAWING_PERIOD) {
-                    time = act_time;
-				}
+		// act_time = SDL_GetTicks();
+        // if (!quit && act_time - _time >= REDRAWING_PERIOD) {
+        //     int max_frame_step = 10;
+        //     do {
+        //         _time += REDRAWING_PERIOD;
+        //         if ((act_time - _time) > 10 * REDRAWING_PERIOD) {
+        //             _time = act_time;
+		// 		}
 
 	
 				// render graphics
 				Render(screen);
 				SDL_Flip(screen);
 				
-                act_time = SDL_GetTicks();
-                max_frame_step--;
-            } while (act_time - time >= REDRAWING_PERIOD && max_frame_step > 0);
+        //         act_time = SDL_GetTicks();
+        //         max_frame_step--;
+        //     } while (act_time - _time >= REDRAWING_PERIOD && max_frame_step > 0);
 
-        }
-        if ((act_time - init_time) >= 1000) {
-            frames_per_sec = frames_per_sec_tmp;
-            frames_per_sec_tmp = 0;
-            init_time = act_time;
-        }
+        // }
+        // if ((act_time - init_time) >= 1000) {
+        //     frames_per_sec = frames_per_sec_tmp;
+        //     frames_per_sec_tmp = 0;
+        //     init_time = act_time;
+        // }
 		
-		SDL_Delay(1);		
-	}
-
-	finalizeSDL();
-
-	return 0;
+		//SDL_Delay(1);		
 }
 
 
@@ -289,7 +314,7 @@ SDL_Surface* initializeSDL(int moreflags)
 	char VideoName[256];
 	SDL_Surface *screen;
 
-	int flags = SDL_HWPALETTE|moreflags;
+	int flags = SDL_SWSURFACE | moreflags; //SDL_HWPALETTE|moreflags;
 
 	if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) < 0) {
 		return 0;
@@ -329,7 +354,7 @@ SDL_Surface* initializeSDL(int moreflags)
 	
 	Sound_initialization();
 
-	pause(1000);
+	pause_main(1000);
 
 	screen = SDL_SetVideoMode(SCREEN_X, SCREEN_Y, COLOUR_DEPTH, flags);
 

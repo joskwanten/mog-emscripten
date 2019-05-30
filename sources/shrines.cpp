@@ -16,7 +16,7 @@
 const int MAX_FIRED_ARROWS[2]={2,3};
 
 
-/* Gráficos: */ 
+/* Grï¿½ficos: */ 
 extern Bitmap *konami_bmp,*menu_bmp,*tiles_bmp,*enemy_bmp;
 extern int n_tiles;
 extern CTile **tiles;
@@ -28,9 +28,9 @@ extern int STATE,SUBSTATE;
 extern int cycle;
 
 /* Juego: */ 
-extern int map;			/* En que mundo está el personaje			*/ 
-extern int map_x,map_y;	/* En que habitación dentro del mundo		*/ 
-extern int pers_x,pers_y;	/* Posición del personaje en la habitación	*/ 
+extern int map;			/* En que mundo estï¿½ el personaje			*/ 
+extern int map_x,map_y;	/* En que habitaciï¿½n dentro del mundo		*/ 
+extern int pers_x,pers_y;	/* Posiciï¿½n del personaje en la habitaciï¿½n	*/ 
 extern int pers_pos;
 extern bool pers_right;	/* Hacia donde mira el personaje			*/ 
 extern int pers_state;		/* Estado en el que se encuentra el personaje	*/ 
@@ -42,10 +42,10 @@ extern bool old_sword;
 extern int sword_x,sword_y;	/* Coordenadas de la espada.	*/ 
 extern int sword_time;
 extern unsigned char old_keyboard[SDLK_LAST];
-extern int in_ladder;			/* En qué escalera está el personaje	*/ 
-extern bool previous_x_collision;	/* Hubo una colisión en X en el frame anterior? */ 
-extern bool previous_y_collision;	/* Hubo una colisión en Y en el frame anterior? */ 
-extern int hit_time;	/* Contador para saber cuando pueden dañarnos de nuevo	*/ 
+extern int in_ladder;			/* En quï¿½ escalera estï¿½ el personaje	*/ 
+extern bool previous_x_collision;	/* Hubo una colisiï¿½n en X en el frame anterior? */ 
+extern bool previous_y_collision;	/* Hubo una colisiï¿½n en Y en el frame anterior? */ 
+extern int hit_time;	/* Contador para saber cuando pueden daï¿½arnos de nuevo	*/ 
 extern int character;
 extern bool live_character[2],can_revive_character[2];
 extern int current_weapon;
@@ -139,7 +139,7 @@ void passage_mainloop(int map,int map_x,int map_y,unsigned char *screen,int dx,i
 	unsigned char *keyboard;
 
 	SDL_PumpEvents();
-	keyboard = (unsigned char *)SDL_GetKeyState(NULL);
+	keyboard = (unsigned char *)SDL_GetKeyboardState(NULL);
 
 	/* Dibujar el marco: */ 
 	int i;

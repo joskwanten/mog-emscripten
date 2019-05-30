@@ -404,12 +404,12 @@ extern SOUNDT S_bdemonbullet,S_lightning;
 	{
 		unsigned char *keyboard;
 		SDL_PumpEvents();
-		keyboard = (unsigned char *)SDL_GetKeyState(NULL);
+		//keyboard = (unsigned char *)SDL_GetKeyState(NULL);
 
 		fprintf(fp,"keyboard:\n");
-		for(i=0;i<SDLK_LAST;i++) {
-			fprintf(fp,"%.3i - %s\n",i,(keyboard[i] ? "true":"false"));
-		} /* for */ 
+		// for(i=0;i<SDLK_LAST;i++) {
+		// 	fprintf(fp,"%.3i - %s\n",i,(keyboard[i] ? "true":"false"));
+		// } /* for */ 
 	}
 
 	fprintf(fp,"old_keyboard:\n");

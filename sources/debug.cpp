@@ -24,12 +24,8 @@ void output_debug_message(const char *fmt, ...)
     va_start(ap, fmt);
     vsprintf(text, fmt, ap);
     va_end(ap);
-
-    if (fp == 0)
-		fp = f1open("mog.dbg", "w", USERDATA);
-
-    fprintf(fp, text);
-    fflush(fp);
+    
+    printf("debug: %s", text);    
 } /* glprintf */
 
 
@@ -37,6 +33,6 @@ void output_debug_message(const char *fmt, ...)
 
 void close_debug_messages(void)
 {
-    fclose(fp);
-    fp = 0;
+    // fclose(fp);
+    // fp = 0;
 } /* close_debug_messages */
