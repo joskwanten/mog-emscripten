@@ -18,6 +18,11 @@
 #include "object.h"
 #include "filehandling.h"
 
+
+ #ifdef __EMSCRIPTEN__ 
+ #include <emscripten.h> 
+ #endif 
+
 /* Paths: */ 
 
 
@@ -1702,21 +1707,23 @@ void GameCycle(BYTE *screen,int dx,int dy)
 					if (!old_keyboard[SDLK_F9] && keyboard[SDLK_F9]) slot=5;
 
 					if (slot!=-1) {
-						char tmp[80];
-						FILE *fp;
-
-						sprintf(tmp,"sgame%.2i.txt",slot);
-						fp=f1open(tmp,"r",USERDATA);
-						if (fp!=0) {
-							int i;
-							for(i=0;i<48;i++) {
-								password[i]=fgetc(fp);
+						char *tmp;
+						char script[256];
+						sprintf(script, "localStorage['mog%d']", slot);
+						tmp = emscripten_run_script_string(script);
+						//printf("Password: %s", tmp);
+						//FILE *fp;
+						// sprintf(tmp,"sgame%.2i.txt",slot);
+						// fp=f1open(tmp,"r",USERDATA);
+						// if (fp!=0) {							
+							for(int i=0;i<48;i++) {
+								password[i]=tmp[i];
 							} /* for */ 
-							fclose(fp);
+							//fclose(fp);
 							Sound_play(S_select);
-						} else {
-							Sound_play(S_nocoins);
-						} /* if */ 
+						// } else {
+						// 	Sound_play(S_nocoins);
+						// } /* if */ 
 					} /* if */ 
 
 					if (!old_keyboard[SDLK_ESCAPE] && keyboard[SDLK_ESCAPE]) {

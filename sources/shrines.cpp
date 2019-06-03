@@ -13,6 +13,11 @@
 #include "mog.h"
 #include "filehandling.h"
 
+
+ #ifdef __EMSCRIPTEN__ 
+ #include <emscripten.h> 
+ #endif 
+
 const int MAX_FIRED_ARROWS[2]={2,3};
 
 
@@ -264,16 +269,24 @@ void passage_mainloop(int map,int map_x,int map_y,unsigned char *screen,int dx,i
 
 			generatepassword(passwd);
 
-			sprintf(tmp,"sgame%.2i.txt",slot);
-			fp=f1open(tmp,"w",USERDATA);
-			if (fp!=0) {
-				int i;
-				for(i=0;i<48;i++) {
-					fprintf(fp,"%c",passwd[i]);
-				} /* for */ 
-				fclose(fp);
-				Sound_play(S_select);
-			} /* if */ 
+			//printf( "passwd : %s", passwd);
+			
+			char script[256];
+
+			sprintf(script, "localStorage['mog%d'] = '%s'", slot, passwd);
+
+			emscripten_run_script_string(script);
+
+			// sprintf(tmp,"sgame%.2i.txt",slot);
+			// fp=f1open(tmp,"w",USERDATA);
+			// if (fp!=0) {
+			// 	int i;
+			// 	for(i=0;i<48;i++) {
+			// 		fprintf(fp,"%c",passwd[i]);
+			// 	} /* for */ 
+			// 	fclose(fp);
+			Sound_play(S_select);
+			// } /* if */ 
 		} /* if */ 
 
 		if (passage_state==0) {
