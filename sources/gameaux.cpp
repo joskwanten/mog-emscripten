@@ -2850,17 +2850,18 @@ void check_typed_word(void)
 
 
 bool typed_word_p(char *word)
-{
-	char *str,c;
-	int i,l;
+{	
+	char c, s;
+	int i,l;	
 
 	l=strlen(word);
 	if (l>16) l=16;
 
 	for(i=0;i<l;i++) {
-		c=word[(l-1)-i];
-		str=(char *)SDL_GetKeyName(last_word[i]);
-		if (str[1]!=0 || str[0]!=c) return false;
+		c= word[(l-1)-i];
+		s= last_word[i];
+		// printf("key '%c' = '%c", s, c);
+		if (s != c) return false;
 	} /* for */ 
 
 	return true;

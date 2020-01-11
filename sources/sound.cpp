@@ -115,7 +115,7 @@ SOUNDT Sound_create_sound(char *file,int flags)
 	char name[256],name2[256];
 	int i;
 
-	printf("Loading %s\n", file);
+	//printf("Loading %s\n", file);
 
 	if (sound_enabled) {
 		for(i=0;i<n_ext;i++) {
@@ -150,7 +150,7 @@ void Sound_play(SOUNDT s)
 
 	if (sound_enabled) {
 		int res = Mix_PlayChannel(-1,s,0);	
-		printf("Played sound with result %d\n", res);
+		//printf("Played sound with result %d\n", res);
 	}
 } /* Sound_play */ 
 
@@ -246,7 +246,7 @@ char *loopmusic;
 void playSong(char *f1);
 
 void musicFinished() {
-	printf("Music finished %d, %d!\n", leftToPlay, playIndex);
+	//printf("Music finished %d, %d!\n", leftToPlay, playIndex);
 	if (leftToPlay > 0) {
 		leftToPlay--;
 		playSong(musicToPlay[++playIndex]);
@@ -256,7 +256,7 @@ void musicFinished() {
 }
 
 void musicFinishedLoop() {
-	printf("Music finished %d, %d!\n", leftToPlay, playIndex);	
+	//printf("Music finished %d, %d!\n", leftToPlay, playIndex);	
 
 	if (loopmusic) {
 		playSong(loopmusic);	
@@ -288,7 +288,7 @@ void playSong(char *f1) {
 
 void Sound_create_music(char *f1,char *f2,char *f3)
 {
-	printf("Sound_create_music called with %s, %s, %s\n", f1, f2, f3);
+	//printf("Sound_create_music called with %s, %s, %s\n", f1, f2, f3);
 	leftToPlay = 0;
 	loopmusic = NULL;
 
