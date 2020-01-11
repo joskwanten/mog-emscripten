@@ -265,7 +265,7 @@ void musicFinishedLoop() {
 
 void playSong(char *f1) {
 	char tmp[256];
-	printf("playSong %s\n", f1);
+	//printf("playSong %s\n", f1);
 	Sound_obtain_file_name(f1,tmp);
 	
 	if (music) 

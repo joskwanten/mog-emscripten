@@ -1,3 +1,4 @@
 /webserver/node_modules
 /emscripten
 !/emscripten/build.cmd
+!/emscripten/*.html
