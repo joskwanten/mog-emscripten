@@ -5,7 +5,15 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Emscripten-Generated Code</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0px 0px 0px 0px;
+            background: black;
+        }
+        
         .emscripten {
             padding-right: 0;
             margin-left: auto;
@@ -23,7 +31,9 @@
         }
         
         div.emscripten_border {
+            margin-top: 100px;
             border: 1px solid black;
+            position: relative;
         }
         /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
         
@@ -46,6 +56,7 @@
             border-top: 10px solid rgb(100, 0, 200);
             border-radius: 100%;
             background-color: rgb(200, 100, 250);
+            color: #777;
         }
         
         .invisible {
@@ -91,30 +102,44 @@
 </head>
 
 <body>
-    <hr/>
-    <figure style="overflow:visible;" id="spinner">
+    <!-- <hr/> -->
+    <figure style="overflow:visible;color:#777;" id="spinner">
+        <div style="width:320px;height:200px;margin:auto">
+            <img src="logo.png" width="320px;">
+        </div>
         <div class="spinner"></div>
-        <center style="margin-top:0.5em"><strong>emscripten</strong></center>
+        <center style="margin-top:0.5em"><strong>Loading Maze of Galious</strong></center>
     </figure>
     <div class="emscripten" id="status">Downloading...</div>
     <div class="emscripten">
         <progress value="0" max="100" id="progress" hidden=1></progress>
     </div>
     <div class="emscripten_border">
-        <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+        <canvas width="640" height="480" class="emscripten" id="canvas" oncontextmenu="event.preventDefault()">            
+        </canvas>
+        <div style="position:absolute;width: 640px;height: 400px;margin: auto;top: 0;left: 0;right: 0;">
+            <div style="width: 640px;height: 400px; position: relative;">
+                <button onclick="Module.requestFullscreen(document.getElementById('pointerLock').checked, document.getElementById('resize').checked)" style="position: absolute;right: 0;bottom: 0;color: #ccc; border: none;background:transparent;">
+                    <i class="material-icons">fullscreen</i>
+                </button>
+            </div>
+        </div>
     </div>
-    <hr/>
-    <div class="emscripten">
+    <!-- <hr/> -->
+    <div class="emscripten ">
         <input class="invisible" type="checkbox" id="resize">
         <input class="invisible" type="checkbox" id="pointerLock" checked>
-        <input type="button" value="Fullscreen" onclick="Module.requestFullscreen(document.getElementById('pointerLock').checked, 
-                                                                                document.getElementById('resize').checked)">
+        <input class="invisible" type="button" value="Fullscreen" onclick="Module.requestFullscreen(document.getElementById( 'pointerLock').checked, document.getElementById( 'resize').checked) ">
     </div>
 
-    <hr/>
-    <textarea class="emscripten" id="output" rows="8"></textarea>
-    <hr>
+    <!-- <hr/> -->
+    <textarea class="invisible emscripten " id="output " rows="8 "></textarea>
+    <!-- <hr> -->
     <script type='text/javascript'>
+        window.addEventListener("keydown", function(e) {
+            e.preventDefault();
+        })
+
         var statusElement = document.getElementById('status');
         var progressElement = document.getElementById('progress');
         var spinnerElement = document.getElementById('spinner');
@@ -127,13 +152,13 @@
                 return function(text) {
                     if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
                     // These replacements are necessary if you render to raw HTML
-                    //text = text.replace(/&/g, "&amp;");
-                    //text = text.replace(/</g, "&lt;");
-                    //text = text.replace(/>/g, "&gt;");
+                    //text = text.replace(/&/g, "&amp; ");
+                    //text = text.replace(/</g, "&lt; ");
+                    //text = text.replace(/>/g, "&gt; ");
                     //text = text.replace('\n', '<br>', 'g');
                     console.log(text);
                     if (element) {
-                        element.value += text + "\n";
+                        element.value += text + "\n ";
                         element.scrollTop = element.scrollHeight; // focus on bottom
                     }
                 };
@@ -151,7 +176,7 @@
                 // As a default initial behavior, pop up an alert when webgl context is lost. To make your
                 // application robust, you may want to override this behavior before shipping!
                 // See http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.15.2
-                canvas.addEventListener("webglcontextlost", function(e) {
+                canvas.addEventListener("webglcontextlost ", function(e) {
                     alert('WebGL context lost. You will need to reload the page.');
                     e.preventDefault();
                 }, false);

@@ -122,8 +122,7 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-void one_iter() {
-	printf(".");
+void one_iter() {	
 	while(SDL_PollEvent(&event)) {
             switch(event.type) {
 			

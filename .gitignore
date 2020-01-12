@@ -2,3 +2,4 @@
 /emscripten
 !/emscripten/build.cmd
 !/emscripten/*.html
+!/emscripten/*.png
